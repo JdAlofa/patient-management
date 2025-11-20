@@ -14,7 +14,7 @@ import jakarta.validation.constraints.NotNull;
 public class Patient {
     @Id
     @GeneratedValue
-    private UUID idl;
+    private UUID id;
 
     @NotNull
     private String name;
@@ -33,12 +33,12 @@ public class Patient {
     @NotNull
     private LocalDate registeredDate;
 
-    public UUID getIdl() {
-        return idl;
+    public UUID getid() {
+        return id;
     }
 
-    public void setIdl(UUID idl) {
-        this.idl = idl;
+    public void setid(UUID id) {
+        this.id = id;
     }
 
     public String getName() {

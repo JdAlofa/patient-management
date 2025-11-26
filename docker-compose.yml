@@ -1,0 +1,44 @@
+services:
+  patient-service-db:
+    image: postgres:latest
+    container_name: patient-service-db
+    environment:
+      POSTGRES_USER: admin_user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+    ports:
+      - "5000:5432"
+    volumes:
+      - ~/genesis/db-storage/patient-management/patient-service-db:/var/lib/postgresql
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin_user -d db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  patient-service:
+    build:
+      context: ./patient-service
+      dockerfile: Dockerfile
+    container_name: patient-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://patient-service-db:5432/db
+      SPRING_DATASOURCE_USERNAME: admin_user
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_SQL_INIT_MODE: always
+    ports:
+      - "4000:4000"
+    networks:
+      - internal
+    depends_on:
+      patient-service-db:
+        condition: service_healthy
+    
+      
+    
+networks:
+  internal:
+    driver: bridge

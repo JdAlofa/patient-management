@@ -33,11 +33,11 @@ public class Patient {
     @NotNull
     private LocalDate registeredDate;
 
-    public UUID getid() {
+    public UUID getId() {
         return id;
     }
 
-    public void setid(UUID id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

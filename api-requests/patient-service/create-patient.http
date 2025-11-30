@@ -2,8 +2,8 @@ POST http://localhost:4000/patients
 Content-Type: application/json
 
 {
-    "name": "John Doe with billing account ", 
-    "email": "john.the.doe.da.real@example.com",
+    "name": "John Doe trying kafka ", 
+    "email": "john.the.doe.da.real.nigga.boi@example.com",
     "address": "123 Main St, Anytown, Dunzledorf",
     "dateOfBirth": "1990-01-01",
     "registeredDate": "2024-06-15"

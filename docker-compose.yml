@@ -17,7 +17,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  
+
   auth-service-db:
     image: postgres:15
     container_name: auth-service-db
@@ -37,11 +37,29 @@ services:
       timeout: 5s
       retries: 5
 
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    container_name: auth-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://auth-service-db:5432/db
+      SPRING_DATASOURCE_USERNAME: admin_user
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_SQL_INIT_MODE: always
+      JWT_SECRET: ${JWT_SECRET}
+    networks:
+      - internal
+    depends_on:
+      auth-service-db:
+        condition: service_healthy
+
   kafka:
     image: confluentinc/cp-kafka:7.9.5
     container_name: kafka
     environment:
-      - CLUSTER_ID=MkU3OEVBNTcwNTJENDM2Qk      
+      - CLUSTER_ID=MkU3OEVBNTcwNTJENDM2Qk
       - KAFKA_NODE_ID=0
       - KAFKA_PROCESS_ROLES=controller,broker
       - KAFKA_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
@@ -123,6 +141,8 @@ services:
       context: ./api-gateway
       dockerfile: Dockerfile
     container_name: api-gateway
+    environment:
+      AUTH_SERVICE_URL: http://auth-service:4005
     ports:
       - "4004:4004"
     networks:

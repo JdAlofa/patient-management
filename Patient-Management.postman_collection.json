@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "be41859d-e275-49ed-8ec7-a3ee7aeb5ac9",
+		"name": "Patient-Management",
+		"description": "API requests for testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45173273",
+		"_collection_link": "https://jd-39915.postman.co/workspace/e7c3b6ea-fe6f-4dd2-8a61-d56a7f7b117f/collection/45173273-be41859d-e275-49ed-8ec7-a3ee7aeb5ac9?action=share&source=collection_link&creator=45173273"
+	},
+	"item": [
+		{
+			"name": "Patient-Service",
+			"item": [
+				{
+					"name": "create-patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John Doe trying kafka \", \r\n    \"email\": \"john.the.doe.da.real.nigga.boi@example.com\",\r\n    \"address\": \"123 Main St, Anytown, Dunzledorf\",\r\n    \"dateOfBirth\": \"1990-01-01\",\r\n    \"registeredDate\": \"2024-06-15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/patients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-Patient",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/patients/{{patient-id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"patients",
+								"{{patient-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-patients",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlckB0ZXN0LmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc2NDc3NjY2NSwiZXhwIjoxNzY0ODEyNjY1fQ.Wd09A9Nhc8z8Nx-DFdOLaY0IWV1zBeJb8hlKaPltn0EIbA34tw3FQaMabYyT7HCH",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4004/api/patients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"api",
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-patient",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John Doebeedoo ba doo\", \r\n    \"email\": \"john.the.doe@example1.com\",\r\n    \"address\": \"123 Main St, Anytown, Dunzledorf\",\r\n    \"dateOfBirth\": \"1990-01-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/patients/{{patient-id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"patients",
+								"{{patient-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth-Service",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"testuser@test.com\",\r\n  \"password\": \"password123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4004/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4004",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validate-token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0dXNlckB0ZXN0LmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc2NDcwMTU3MSwiZXhwIjoxNzY0NzM3NTcxfQ.iDBH3SezFmYNZcJ-yReTqTovWm6Ounp9I625Sw0CvGgWIEUvG3eDev6NTotIKffr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4005/validate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"validate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "patient-id",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
